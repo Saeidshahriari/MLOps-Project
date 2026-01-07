@@ -14,14 +14,16 @@ git init
 
 ```bash
 # Create virtual environment
-python -m venv .mlops
-
+python -m venv .mlops   
+...
+# Upgrade pip
+pip install --upgrade pip
 ```
 
 ```bash
 
 # use --upgrade if you want to install the latest libraries that already installed!
-
+...
 ```
 
 
@@ -32,7 +34,7 @@ python -m venv .mlops
 
 ```bash
 model:
- ...
+...
 EOF
 ```
 
@@ -203,7 +205,7 @@ curl -X POST "http://fastapi:8000/predict" `
 
 
 
-![](E:\Data_Engineering_code7\44-MLOps-Project\5-Creating_a_production_ready_API_PUBLIC_clean\prometheus.png)
+![](.\pics\prometheus.png)
 
 
 
@@ -263,7 +265,14 @@ In the above key-value records:
 
 docker-compose -p prometheus up -d 
 
-...
+# Make sure model is trained first
+python src/models/simple_train.py
+
+# Start API with Prometheus monitoring
+python src/api/monitored_app.py
+
+# Check API health
+curl http://localhost:8000/health
 
 # Check Prometheus UI
 # Open browser: http://localhost:9090
@@ -315,7 +324,7 @@ predictions_total
 If you used Docker Compose with Grafana:
 
 1. **Open Grafana**: http://localhost:3000
-2. **Login**: 
+2. **Login**: ...
 3. **Add Prometheus data source**: http://prometheus:9090
 4. **Create dashboard** with panels for:
    - fraud_predictions_total
@@ -332,7 +341,7 @@ docker restart prometheus
 
 
 
-## Create one production-ready API
+## 🚩 Create one production-ready API
 
 We will create our final API with these endpoints:
 
