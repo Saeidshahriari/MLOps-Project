@@ -1,0 +1,13 @@
+river
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+prometheus-client
+requests
+pydantic
+pyyaml
+Jinja2
+prometheus-fastapi-instrumentator
+mlflow

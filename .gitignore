@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual envs
+.venv/
+venv/
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Runtime artifacts
+docker/dockerfiles/mlruns/
+docker/dockerfiles/metrics/
+docker/dockerfiles/data/processed_batches/
+docker/dockerfiles/data/new_batches/
+docker/dockerfiles/models/*.pkl
+
+# Logs
+*.log
