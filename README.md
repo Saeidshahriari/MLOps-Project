@@ -206,7 +206,14 @@ Read: `docs/SECURITY.md` and `docs/THREAT_MODEL.md`.
 - Full AWS IaC (Terraform) in a separate private repo
 
 ---
+## Acknowledgements
 
+This project was built based on concepts and guidance from my instructor’s MLOps bootcamp materials.  
+Special thanks to **Mohammad Fozouni** for the structured curriculum and practical examples that inspired this implementation.
+
+I implemented all the code, integrated it, and customized the project in this repository.
+
+---
 ## Reference guide
 The step-by-step course guide used to build this stage is included here:
 - `MLOps-Project-Guide-P5.md`
