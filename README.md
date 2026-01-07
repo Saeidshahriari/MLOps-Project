@@ -30,7 +30,10 @@ This project shows how to:
 
 ## Architecture
 
+![Architecture flow](pics/mlops_architecture_flow_final.gif)
+
 ### A) Local / Docker Compose (this repo)
+
 ```mermaid
 flowchart LR
   Client[Client / Tester] -->|HTTP| API[FastAPI :8000]
@@ -42,23 +45,32 @@ flowchart LR
 ### B) AWS deployment (high-level, infra files excluded)
 ```mermaid
 flowchart TB
-  subgraph AWS[VPC on AWS]
-    subgraph Public[Public Subnet]
-      RP[Reverse Proxy / TLS (e.g., Traefik)]
-      MON[Grafana + Prometheus]
-      CI[CI/CD (e.g., Jenkins)]
-      Bastion[Bastion SSH]
+
+  subgraph AWS["VPC on AWS"]
+    subgraph Public["Public Subnet"]
+      RP["Reverse Proxy / TLS (Traefik)"]
+      MON["Grafana + Prometheus"]
+      CI["CI/CD (Jenkins)"]
+      BASTION["Bastion (SSH)"]
     end
-    subgraph Private[Private Subnet]
-      API2[FastAPI]
-      MLF2[MLflow]
-      JOB[Continuous Training Job]
+
+    subgraph Private["Private Subnet"]
+      API["FastAPI (Fraud Scoring API)"]
+      MLF["MLflow Tracking"]
+      DB["PostgreSQL"]
+      TRAIN["Continuous Training"]
     end
-    RP --> API2
-    RP --> MLF2
-    API2 --> MON
-    CI -->|deploy images| RP
   end
+
+  CLIENT["Clients / Payment Gateway"] --> RP
+  RP --> API
+  API --> DB
+  API --> MLF
+  API -->|" /metrics "| MON
+  TRAIN --> MLF
+  TRAIN -->|"new model"| API
+
+  CI -->|"deploy"| AWS
 ```
 
 ---
